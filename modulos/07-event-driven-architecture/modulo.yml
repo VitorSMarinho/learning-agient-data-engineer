@@ -3,6 +3,6 @@ trilha: dados
 ordem: 7
 titulo: "Event-Driven Architecture (Lambda, SQS)"
 reviewer_agent: engineering-devops-automator
-status_projeto: a_detalhar
-projeto_path: null
-review_status_path: null
+status_projeto: completo
+projeto_path: projeto/
+review_status_path: reviews/07-event-driven-architecture.json

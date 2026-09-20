@@ -3,6 +3,6 @@ trilha: dados
 ordem: 4
 titulo: "Web Scraping"
 reviewer_agent: python-reviewer
-status_projeto: a_detalhar
-projeto_path: null
-review_status_path: null
+status_projeto: completo
+projeto_path: projeto/
+review_status_path: reviews/04-web-scraping.json

@@ -3,6 +3,6 @@ trilha: dados
 ordem: 12
 titulo: "Deploys e Ambientes"
 reviewer_agent: engineering-devops-automator
-status_projeto: a_detalhar
-projeto_path: null
-review_status_path: null
+status_projeto: completo
+projeto_path: projeto/
+review_status_path: reviews/12-deploys-e-ambientes.json
