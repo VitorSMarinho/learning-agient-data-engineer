@@ -15,23 +15,21 @@ Pipelines robustos e escaláveis para produção.
 
 ## Módulos
 
-| # | Módulo | Status |
-|---|--------|--------|
-| 01 | [Infra: Linux, Docker](modulos/01-infra-linux-docker/) | conteúdo disponível |
-| 02 | [Airflow Workflow Orchestration](modulos/02-airflow-workflow-orchestration/) | conteúdo disponível |
-| 03 | [Data Pipelines](modulos/03-data-pipelines/) | conteúdo disponível |
-| 04 | [Web Scraping](modulos/04-web-scraping/) | conteúdo disponível |
-| 05 | [Workshop (projetos práticos)](modulos/05-workshop-projetos-praticos/) | conteúdo disponível |
-| 06 | [Extração de dados](modulos/06-extracao-de-dados/) | conteúdo disponível |
-| 07 | [Event-Driven Architecture (Lambda, SQS)](modulos/07-event-driven-architecture/) | conteúdo disponível |
-| 08 | [Arquitetura Streaming](modulos/08-arquitetura-streaming/) | conteúdo disponível |
-| 09 | [Observabilidade](modulos/09-observabilidade/) | conteúdo disponível |
-| 10 | [Infra as Code (IaC)](modulos/10-infra-as-code/) | conteúdo disponível |
-| 11 | [Data Sprint (com mentoria)](modulos/11-data-sprint/) | conteúdo disponível |
-| 12 | [Deploys e Ambientes](modulos/12-deploys-e-ambientes/) | conteúdo disponível |
-| 13 | [Prática: Data Dashboard](modulos/13-pratica-data-dashboard/) | conteúdo disponível |
-| 14 | [Realtime Dashboard](modulos/14-realtime-dashboard/) | conteúdo disponível |
+Todos os 14 módulos têm projeto prático completo — pronto pra resolver e submeter via PR.
 
-"Conteúdo disponível" = objetivo/conceitos/recursos prontos, projeto prático em detalhamento
-incremental (nenhum módulo desta trilha tem `projeto/` completo ainda — o primeiro projeto
-completo da Trilha de Dados é o próximo passo após validar a mecânica na Trilha de IA).
+| # | Módulo |
+|---|--------|
+| 01 | [Infra: Linux, Docker](modulos/01-infra-linux-docker/) |
+| 02 | [Airflow Workflow Orchestration](modulos/02-airflow-workflow-orchestration/) |
+| 03 | [Data Pipelines](modulos/03-data-pipelines/) |
+| 04 | [Web Scraping](modulos/04-web-scraping/) |
+| 05 | [Workshop (projetos práticos)](modulos/05-workshop-projetos-praticos/) |
+| 06 | [Extração de dados](modulos/06-extracao-de-dados/) |
+| 07 | [Event-Driven Architecture (Lambda, SQS)](modulos/07-event-driven-architecture/) |
+| 08 | [Arquitetura Streaming](modulos/08-arquitetura-streaming/) |
+| 09 | [Observabilidade](modulos/09-observabilidade/) |
+| 10 | [Infra as Code (IaC)](modulos/10-infra-as-code/) |
+| 11 | [Data Sprint (com mentoria)](modulos/11-data-sprint/) |
+| 12 | [Deploys e Ambientes](modulos/12-deploys-e-ambientes/) |
+| 13 | [Prática: Data Dashboard](modulos/13-pratica-data-dashboard/) |
+| 14 | [Realtime Dashboard](modulos/14-realtime-dashboard/) |
