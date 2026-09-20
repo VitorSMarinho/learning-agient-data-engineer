@@ -3,6 +3,6 @@ trilha: dados
 ordem: 2
 titulo: "Airflow Workflow Orchestration"
 reviewer_agent: python-reviewer
-status_projeto: a_detalhar
-projeto_path: null
-review_status_path: null
+status_projeto: completo
+projeto_path: projeto/
+review_status_path: reviews/02-airflow-workflow-orchestration.json
