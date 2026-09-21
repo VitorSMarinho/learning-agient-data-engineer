@@ -9,17 +9,34 @@ sozinha, sem o usuário apertar F5. É onde engenharia de dado encontra front-en
 
 Módulos 08, 13.
 
-## Conceitos-chave
+## Fundamentos
 
-- WebSocket vs Server-Sent Events (SSE) pra atualização em tempo real — trade-off de cada um
-- Estado no front-end atualizado por stream (não polling ingênuo de API a cada N segundos)
-- Backpressure no front-end: o que fazer quando o evento chega mais rápido do que a UI renderiza
+**WebSocket vs SSE.** WebSocket é bidirecional (cliente e servidor mandam mensagem a qualquer
+momento) e mais complexo de configurar. Server-Sent Events é unidirecional (só o servidor manda
+pro cliente), roda sobre HTTP comum, e é mais simples de implementar e depurar. Pra um dashboard
+que só RECEBE atualização (não precisa mandar nada de volta em tempo real), SSE geralmente é a
+escolha mais simples que resolve o problema — WebSocket vale quando você precisa de via dupla de
+verdade.
 
-## Recursos gratuitos
+**Estado atualizado por stream, não polling.** Polling ingênuo (`fetch` a cada 5 segundos) gasta
+requisição mesmo quando nada mudou, e o delay até o usuário ver a mudança é, na média, metade do
+intervalo de polling. Uma conexão de stream (SSE/WebSocket) empurra a atualização assim que ela
+acontece do lado do servidor — sem requisição desperdiçada, sem delay artificial.
 
-- [MDN — Server-Sent Events (referência técnica gratuita)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
-- [MDN — WebSockets API (referência técnica gratuita)](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
-- [Next.js — documentação oficial](https://nextjs.org/docs) (Route Handlers com streaming)
+**Backpressure no front-end.** Se o servidor manda eventos mais rápido do que o navegador
+consegue re-renderizar (ex.: 100 eventos por segundo, mas o componente é pesado), a UI trava ou
+o navegador acumula um backlog de renders pendentes. A estratégia comum é agrupar eventos que
+chegam numa janela curta (debounce/throttle) e renderizar o estado consolidado, não cada evento
+individualmente.
+
+## Documentação de referência
+
+- [MDN — Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) —
+  referência técnica gratuita, cobre a API usada pelo fundamento 1 e 2.
+- [MDN — WebSockets API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) — pra
+  comparar contra SSE e decidir qual usar (fundamento 1).
+- [Next.js — Route Handlers com streaming, documentação oficial](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) —
+  como implementar o lado servidor de SSE na mesma stack usada no `learning-agient`.
 
 ## O que você vai construir
 

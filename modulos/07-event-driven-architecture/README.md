@@ -10,19 +10,42 @@ mágica de "Lambda" e "SQS" e mostra o padrão por trás.
 
 Módulos 01, 03.
 
-## Conceitos-chave
+## Fundamentos
 
-- Função serverless: gatilho, execução stateless, cold start
-- Fila (SQS) como buffer de desacoplamento entre produtor e consumidor
-- Idempotência em processamento de evento (mensagem pode chegar duplicada)
-- Dead-letter queue: o que fazer quando o processamento falha repetidamente
+**Função serverless: gatilho, execução stateless, cold start.** Uma função Lambda não fica
+"rodando" esperando — ela é invocada por um gatilho (mensagem numa fila, upload num storage,
+chamada HTTP) e some depois de terminar. Isso significa que ela não pode guardar estado entre
+execuções na memória (stateless) — tudo que precisa persistir vai pra um banco ou storage
+externo. "Cold start" é a latência extra da primeira invocação depois de um período ocioso,
+quando o provedor precisa inicializar o ambiente de execução do zero — relevante pra entender
+por que a mesma função às vezes responde rápido e às vezes não.
 
-## Recursos gratuitos
+**Fila como buffer de desacoplamento.** Sem fila, um produtor que gera evento mais rápido do que
+o consumidor processa derruba o consumidor (ou perde evento). A fila absorve esse descompasso —
+o produtor só precisa conseguir publicar na fila (rápido), e o consumidor processa no próprio
+ritmo, lendo da fila. Isso desacopla os dois: um pode cair e se recuperar sem o outro nem notar,
+porque a fila segura a mensagem no meio tempo.
 
-- [AWS Lambda — documentação oficial](https://docs.aws.amazon.com/lambda/) (free tier generoso)
-- [Amazon SQS — documentação oficial](https://docs.aws.amazon.com/sqs/)
-- [LocalStack — documentação oficial](https://docs.localstack.cloud/) (simula AWS localmente, sem gastar free tier testando)
-- [Serverless Framework — documentação oficial](https://www.serverless.com/framework/docs) (facilita deploy, tem tier gratuito)
+**Idempotência em processamento de evento.** Fila com garantia "at-least-once" (a maioria) pode
+entregar a mesma mensagem mais de uma vez — é o preço de garantir que nenhuma mensagem se perca.
+Isso significa que o consumidor precisa ser capaz de processar a MESMA mensagem duas vezes sem
+duplicar o efeito (ex.: checar se já processou aquele ID antes de aplicar a mudança). Assumir
+"cada mensagem chega exatamente uma vez" é um bug esperando pra acontecer.
+
+**Dead-letter queue.** Quando uma mensagem falha o processamento repetidamente (código com bug,
+dado malformado), reprocessá-la pra sempre trava a fila pras mensagens boas que vêm atrás. Uma
+dead-letter queue é o destino dessas mensagens problemáticas depois de N tentativas — elas saem
+do fluxo principal e ficam isoladas pra investigação manual, sem bloquear o resto.
+
+## Documentação de referência
+
+- [AWS Lambda — documentação oficial](https://docs.aws.amazon.com/lambda/) — a seção de
+  "Lambda execution environment" explica cold start e ciclo de vida em detalhe.
+- [Amazon SQS — documentação oficial](https://docs.aws.amazon.com/sqs/) — foque em "at-least-once
+  delivery" e "dead-letter queues", são os dois conceitos que o projeto deste módulo cobra.
+- [LocalStack — documentação oficial](https://docs.localstack.cloud/) — simula Lambda e SQS
+  localmente, sem custo e sem precisar de conta AWS real — é como você resolve o projeto deste
+  módulo sem gastar nada.
 
 ## O que você vai construir
 

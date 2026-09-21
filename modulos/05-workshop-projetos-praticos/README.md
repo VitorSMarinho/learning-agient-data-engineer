@@ -10,16 +10,36 @@ trabalho de verdade — misturado, não em caixinhas separadas.
 
 Módulos 01-04.
 
-## Conceitos-chave
+## Fundamentos
 
-- Integração de componentes já dominados em um sistema coeso
-- Decisão de arquitetura sob restrição real (tempo, dado disponível, escopo)
-- Documentação de decisão (por que essa abordagem e não outra)
+**Integração de componentes já dominados em um sistema coeso.** Saber usar Docker, saber usar
+Airflow, saber escrever um scraper — cada um isolado — não é o mesmo que saber montar os três
+funcionando juntos. Integração revela problema que nenhum módulo isolado mostra: a DAG do
+Airflow precisa saber onde o scraper grava o dado, o container do scraper precisa estar na
+mesma rede Docker que o Postgres, a ordem de subida dos serviços importa. É nessa fricção que
+o aprendizado dos módulos anteriores vira competência de verdade.
 
-## Recursos gratuitos
+**Decisão de arquitetura sob restrição real.** No mundo real você quase nunca tem tempo/recurso
+infinito pra fazer a versão "perfeita". Este módulo força a mesma pressão em miniatura: com o
+tempo e escopo que você tem, o que fica simples de propósito e o que precisa ser robusto? Essa
+decisão consciente (e documentada) é mais valiosa como sinal de maturidade técnica do que
+qualquer código sofisticado.
 
-- Revisitar os recursos já listados nos módulos 01-04 — este módulo é aplicação, não conteúdo novo
-- [Awesome Data Engineering (lista curada de recursos gratuitos no GitHub)](https://github.com/igorbarinov/awesome-data-engineering)
+**Documentação de decisão.** Escrever POR QUE você escolheu uma abordagem (e não outra) é uma
+habilidade separada de escrever código que funciona. Um `ARQUITETURA.md` curto que explica o
+trade-off (ex.: "optei por polling em vez de webhook porque X") é o que permite que outra
+pessoa — ou você mesmo, 6 meses depois — entenda a decisão sem precisar reconstruir o raciocínio
+do zero lendo código.
+
+## Documentação de referência
+
+Este módulo é aplicação, não conceito novo — revisite a documentação já linkada nos módulos
+01-04 conforme for precisando dela durante a integração. Um recurso adicional útil pra esse
+momento específico:
+
+- [Awesome Data Engineering (lista curada de recursos gratuitos no GitHub)](https://github.com/igorbarinov/awesome-data-engineering) —
+  útil se, ao integrar, você perceber que precisa de uma ferramenta que os módulos anteriores
+  não cobriram.
 
 ## O que você vai construir
 
