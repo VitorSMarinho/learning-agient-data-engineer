@@ -54,6 +54,7 @@ pra próxima execução ser incremental.
 
 ## Como é avaliado
 
-Este módulo ainda não tem projeto prático detalhado. Quando tiver, será resolvido e submetido
-via PR neste repo, revisado pela skill `revisar-modulo-agient` usando o subagente
-`python-reviewer`.
+Ao abrir o PR com a solução neste repo, rode a skill `revisar-modulo-agient`. Ela
+aciona o subagente `python-reviewer` sobre o diff, usando `projeto/CRITERIOS_ACEITE.md`
+como rubrica, posta o resultado como comentário no PR e grava
+`reviews/06-extracao-de-dados.json`.
