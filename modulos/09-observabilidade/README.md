@@ -10,19 +10,41 @@ realmente aciona alguém.
 
 Módulos 02, 03.
 
-## Conceitos-chave
+## Fundamentos
 
-- Os três pilares: métricas, logs, traces — aplicados a pipeline de dado
-- Data quality monitoring: volume esperado, schema esperado, freshness (dado está atualizado?)
-- Log estruturado (JSON) vs log de texto solto — por que estruturado é pesquisável
-- Alerta acionável: diferença entre "métrica que existe" e "alerta que alguém vai realmente agir"
+**Os três pilares (métricas, logs, traces) aplicados a dado.** Em aplicação, esses três pilares
+respondem "o sistema tá de pé?". Em pipeline de dado, a pergunta muda pra "o dado tá certo?" —
+métrica vira volume processado e freshness, log estruturado vira rastro de cada transformação
+aplicada a um lote, e trace vira a linhagem de um registro através das etapas do pipeline. O
+conceito é o mesmo, o que você mede é diferente.
 
-## Recursos gratuitos
+**Data quality monitoring.** Um pipeline pode rodar sem erro e ainda entregar dado errado:
+volume caiu 90% (fonte quebrou silenciosamente), schema mudou (coluna nova ou sumida), ou o dado
+tá desatualizado (freshness — a última atualização foi há 3 dias, não há 3 horas como esperado).
+Nenhum desses três é uma exceção que o código captura sozinho — precisa de instrumentação
+deliberada checando essas três coisas depois de cada execução.
 
-- [Prometheus — documentação oficial](https://prometheus.io/docs/introduction/overview/)
-- [Grafana — documentação oficial](https://grafana.com/docs/grafana/latest/) (tier free/self-hosted)
-- [OpenTelemetry — documentação oficial](https://opentelemetry.io/docs/)
-- [Google SRE Book — capítulo de Monitoring (gratuito)](https://sre.google/sre-book/monitoring-distributed-systems/)
+**Log estruturado vs texto solto.** `print(f"processei {n} registros")` é legível por humano mas
+impossível de consultar em escala — você não consegue perguntar "quantas execuções processaram
+menos de 100 registros na última semana?" num monte de string. Log estruturado (JSON, com campos
+fixos como `timestamp`, `pipeline`, `registros_processados`) é uma linha de banco de dado
+disfarçada de log — dá pra agregar, filtrar, alertar em cima.
+
+**Alerta acionável.** Ter um dashboard bonito com métrica não é observabilidade — é decoração se
+ninguém olha ou se, quando dispara, ninguém sabe o que fazer. Um alerta acionável tem um dono, um
+runbook (o que fazer quando disparar) e um limiar calibrado pra não gerar ruído (alerta que
+dispara toda hora vira alerta que todo mundo ignora).
+
+## Documentação de referência
+
+- [Prometheus — documentação oficial](https://prometheus.io/docs/introduction/overview/) — como
+  métrica é coletada e consultada (fundamentos 1 e 2).
+- [Grafana — documentação oficial](https://grafana.com/docs/grafana/latest/) — dashboard e regra
+  de alerta (fundamento 4), tier free/self-hosted é suficiente pro projeto.
+- [OpenTelemetry — documentação oficial](https://opentelemetry.io/docs/) — o padrão pra unificar
+  métrica/log/trace (fundamento 1) se quiser ir além do Prometheus sozinho.
+- [Google SRE Book — capítulo de Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/) —
+  gratuito, é a referência original do conceito de alerta acionável (fundamento 4).
 
 ## O que você vai construir
 
